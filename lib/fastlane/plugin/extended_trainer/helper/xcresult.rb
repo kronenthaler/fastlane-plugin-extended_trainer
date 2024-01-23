@@ -416,7 +416,7 @@ module Fastlane
 
         def failure_message
           new_message = self.message
-          if self.document_location_in_creating_workspace
+          if self.document_location_in_creating_workspace&.url
             file_path = self.document_location_in_creating_workspace.url.gsub("file://", "")
             new_message += " (#{file_path})"
           end
