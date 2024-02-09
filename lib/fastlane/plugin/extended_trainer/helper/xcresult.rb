@@ -239,6 +239,24 @@ module Fastlane
         end
       end
 
+      # - ActionDeviceRecord
+      #   * Kind: object
+      #   * Properties:
+      #     + identifier: String
+      #     + name: String
+      #     + modelName: String
+      #     + operatingSystemVersion: String
+      class ActionDeviceRecord < AbstractObject
+        attr_accessor :identifier, :name, :model_name, :operating_system_version
+        def initialize(data)
+          self.identifier = fetch_value(data, "identifier")
+          self.name = fetch_value(data, "name")
+          self.model_name = fetch_value(data, "modelName")
+          self.operating_system_version = fetch_value(data, "operatingSystemVersion")
+          super
+        end
+      end
+
       # - ActionRunDestinationRecord
       #   * Kind: object
       #   * Properties:
@@ -248,11 +266,12 @@ module Fastlane
       #     + targetDeviceRecord: ActionDeviceRecord
       #     + targetSDKRecord: ActionSDKRecord
       class ActionRunDestinationRecord < AbstractObject
-        attr_accessor :display_name, :target_sdk_record
+        attr_accessor :display_name, :target_sdk_record, :target_device_record
 
         def initialize(data)
           self.display_name = fetch_value(data, "displayName")
           self.target_sdk_record = ActionSDKRecord.new(data["targetSDKRecord"])
+          self.target_device_record = ActionDeviceRecord.new(data["targetDeviceRecord"])
           super
         end
       end

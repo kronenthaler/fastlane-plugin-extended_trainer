@@ -308,7 +308,7 @@ module Fastlane
             test_name: testable_summary.name,
             configuration_name: summaries_to_names[testable_summary],
             destination_name: run_destination.display_name,
-            destination_os_version: run_destination.target_sdk_record.operating_system_version,
+            destination_os_version: run_destination.target_device_record.operating_system_version,
             duration: all_tests.sum(&:duration),
             tests: test_rows
           }

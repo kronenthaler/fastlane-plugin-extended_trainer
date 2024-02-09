@@ -98,7 +98,7 @@ describe Fastlane::ExtendedTrainer do
                                   test_name: "TestUITests",
                                   configuration_name: "Test Scheme Action",
                                   destination_name: "iPhone 6 - 10.3",
-                                  destination_os_version: "13.0",
+                                  destination_os_version: "10.3.1",
                                   duration: 16.05245804786682,
                                   tests: [
                                     {
@@ -123,7 +123,7 @@ describe Fastlane::ExtendedTrainer do
                                   test_name: "TestThisDude",
                                   configuration_name: "Test Scheme Action",
                                   destination_name: "iPhone 6 - 10.3",
-                                  destination_os_version: "13.0",
+                                  destination_os_version: "10.3.1",
                                   duration: 0.5279300212860107,
                                   tests: [
                                     {

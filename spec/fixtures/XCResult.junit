@@ -4,7 +4,7 @@
         <properties>
             <property name="Configuration" value="Test Scheme Action"/>
             <property name="Destination name" value="iPhone 6 - 10.3"/>
-            <property name="Destination OS version" value="13.0"/>
+            <property name="Destination OS version" value="10.3.1"/>
         </properties>
         <testcase classname="TestUITests" name="TestUITests.testExample()" time="16.05245804786682">
         </testcase>
@@ -13,7 +13,7 @@
         <properties>
             <property name="Configuration" value="Test Scheme Action"/>
             <property name="Destination name" value="iPhone 6 - 10.3"/>
-            <property name="Destination OS version" value="13.0"/>
+            <property name="Destination OS version" value="10.3.1"/>
         </properties>
         <testcase classname="TestTests" name="TestTests.testExample()" time="0.0005381107330322266">
         </testcase>

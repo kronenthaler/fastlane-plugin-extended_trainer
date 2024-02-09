@@ -27,7 +27,7 @@ describe Fastlane::ExtendedTrainer do
     it "works with an xcresult", requires_xcode: true do
       tp = Fastlane::ExtendedTrainer::TestParser.new("./spec/fixtures/Test.test_result.xcresult")
       junit = File.read("./spec/fixtures/XCResult.junit")
-      expect(tp.to_junit).to eq(junit)
+      expect(tp.to_junit.strip).to eq(junit.strip)
     end
   end
 end
