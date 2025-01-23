@@ -248,6 +248,7 @@ module Fastlane
       #     + operatingSystemVersion: String
       class ActionDeviceRecord < AbstractObject
         attr_accessor :identifier, :name, :model_name, :operating_system_version
+
         def initialize(data)
           self.identifier = fetch_value(data, "identifier")
           self.name = fetch_value(data, "name")
