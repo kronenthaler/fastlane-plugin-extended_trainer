@@ -10,6 +10,19 @@ module Fastlane
     class TestParser
       attr_accessor :data, :file_content, :raw_json, :number_of_tests, :number_of_failures, :number_of_tests_excluding_retries, :number_of_failures_excluding_retries, :number_of_retries, :number_of_skipped
 
+      def xcresulttool_command(subcommand, args)
+        # Find the current xcresulttool version based on Fastlane's implementation
+        # xcresulttool version 23024, format version 3.53 (current)
+        match = `xcrun xcresulttool version`.match(/xcresulttool version (?<version>\d+),/)
+
+        version = match[:version]&.to_f
+
+        requires_legacy = version >= 23_021.0
+        legacy_flag = requires_legacy ? ' --legacy' : ''
+
+        "xcrun xcresulttool #{subcommand}#{legacy_flag} #{args}"
+      end
+
       # Returns a hash with the path being the key, and the value
       # defining if the tests were successful
       def self.auto_convert(config)
@@ -192,7 +205,8 @@ module Fastlane
         path = Shellwords.escape(path)
 
         # Executes xcresulttool to get JSON format of the result bundle object
-        result_bundle_object_raw = execute_cmd("xcrun xcresulttool get --format json --path #{path}")
+        cmd = xcresulttool_command("get", "--format json --path #{path}")
+        result_bundle_object_raw = execute_cmd(cmd)
         result_bundle_object = JSON.parse(result_bundle_object_raw)
 
         # Parses JSON into ActionsInvocationRecord to find a list of all ids for ActionTestPlanRunSummaries
@@ -202,7 +216,8 @@ module Fastlane
 
           # Maps ids into ActionTestPlanRunSummaries by executing xcresulttool to get JSON
           # containing specific information for each test summary,
-          raw = execute_cmd("xcrun xcresulttool get --format json --path #{path} --id #{action.action_result.tests_ref.id}")
+          cmd = xcresulttool_command("get", "--format json --path #{path} --id #{action.action_result.tests_ref.id}")
+          raw = execute_cmd(cmd)
           json = JSON.parse(raw)
           summaries = ExtendedTrainer::XCResult::ActionTestPlanRunSummaries.new(json)
 
